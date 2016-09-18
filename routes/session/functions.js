@@ -18,9 +18,10 @@
 	  var session = new Session();
     var session_type = req.body.session_type.toLowerCase();
     SessionType
-        .find({"se_type_name" : session_type })
-        .exec(function(err, session_type){
-            session.se_type_id = session_type.id;
+        .findOne({"se_type_name" : session_type })
+        .exec(function(err, type){
+          if(!err) {
+            session.se_type_id = type.id;
             Student.find().exec(function(err, students){
               if(!err){
                 session.st_students = students;
@@ -29,6 +30,7 @@
                 });
               }
             });
+          }
     });
 	};
 
