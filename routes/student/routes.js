@@ -1,12 +1,12 @@
 (function(){
 	var express = require('express'),
-		Student = require('./functions')
+		student = require('./functions'),
 		router = express.Router();
 
-	router.get('/students', Student.index);
-	router.post('/students', Student.create);
-	router.get('/students/:id', Student.show);
-	router.put('/students/:id', Student.update);
+	router.get('/students', student.index);
+	router.post('/students', student.create);
+	router.get('/students/:id', student.show);
+	router.put('/students/:id', student.update);
 
 	module.exports = router;
 })();

@@ -9,9 +9,12 @@
         users = require('./routes/user'),
         students = require('./routes/student/routes.js'),
         sessions = require('./routes/session/routes.js'),
+        admin = require('./routes/admin/routes.js'),
         app = express(),
         env = process.env.NODE_ENV || 'development';
+        //mongoose = require('mongoose');
 
+    //mongoose.connect(process.env.MONGODB_URI);
     app.locals.ENV = env;
     app.locals.ENV_DEVELOPMENT = env == 'development';
 
@@ -33,7 +36,7 @@
     app.use('/users', users);
     app.use('/', students);
     app.use('/', sessions);
-
+    app.use('/', admin);
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
         var err = new Error('Not Found');
