@@ -10,6 +10,10 @@
 			first_name: "Monique",
 			last_name: "King",
 			gender: "female"
+		},{
+			first_name: "George",
+			last_name: "Bush",
+			gender: "male"
 		}];
 
 		res.json({"students": students});
