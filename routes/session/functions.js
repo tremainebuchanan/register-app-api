@@ -16,7 +16,7 @@
 
 	exports.create = function(req, res){
 	  var session = new Session();
-    var session_type = req.body.session_type;
+    var session_type = req.body.session_type.toLowerCase();
     SessionType
         .find({"se_type_name" : session_type })
         .exec(function(err, session_type){
