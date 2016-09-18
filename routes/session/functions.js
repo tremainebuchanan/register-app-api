@@ -16,15 +16,15 @@
 	exports.create = function(req, res){
 	  var students = [],
        session = new Session(req.body);
-       
+
     Student.find().exec(function(err, students){
       if(!err){
         session.st_students = students;
         session.save(function(err){
-          if(!err) res.json({"response" : {"message": 'Created session with id ' + session.id}});
+          if(!err) res.json({"response" : {"message": 'Created session with id ' + session.id, "status": "Ok"}});
           });
       }
-    });    
+    });
 	};
 
 	exports.show = function(req, res){
