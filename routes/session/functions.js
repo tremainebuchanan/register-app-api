@@ -1,7 +1,8 @@
 (function(){
 	var model = require('../../models/db'),
      Session = model.Session,
-     Student = model.Student;
+     Student = model.Student,
+    SessionType = model.SessionType;
 
 	exports.index = function(req, res){
 	   Session
@@ -14,16 +15,20 @@
 	};
 
 	exports.create = function(req, res){
-	  var students = [],
-       session = new Session(req.body);
-
-    Student.find().exec(function(err, students){
-      if(!err){
-        session.st_students = students;
-        session.save(function(err){
-          if(!err) res.json({"response" : {"message": 'Created session with id ' + session.id, "status": "Ok"}});
-          });
-      }
+	  var session = new Session();
+    var session_type = req.body.session_type;
+    SessionType
+        .find({"se_type_name" : session_type })
+        .exec(function(err, session_type){
+            session.se_type_id = session_type.id;
+            Student.find().exec(function(err, students){
+              if(!err){
+                session.st_students = students;
+                session.save(function(err){
+                  if(!err) res.json({"response" : {"message": 'Created session with id ' + session.id, "status": "Ok"}});
+                });
+              }
+            });
     });
 	};
 
