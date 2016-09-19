@@ -9,6 +9,8 @@
 	router.put('/students/:id', api.student.update);
 
   router.get('/students/:id/attendance', api.student.getAttendance);
+  router.get('/students/:id/attendance/:id', api.student.getAttendanceById);
+  router.put('/students/:id/attendance/:id', api.student.updateAttendance);
   router.post('/students/:id/attendance', api.student.postAttendance);
 
 	module.exports = router;

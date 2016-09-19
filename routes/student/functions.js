@@ -31,8 +31,16 @@
       Attendnace
           .find({"st_student_id": req.params.id})
           .exec(function (err, attendance) {
-            if(!err) res.json(attendance);
+            if(!err) res.json({"attendance" : attendance});
           });
+    },
+
+    getAttendanceById : function(req, res){
+      Attendnace
+        .findById(req.params.id)
+        .exec(function (err, attendance) {
+          if(!err) res.json(attendance);
+        });
     },
 
     postAttendance : function(req, res){
@@ -41,6 +49,13 @@
       attendance.save(function(err){
         if(!err) res.json("Attendance record with id " + attendance.id + " created");
       });
+    },
+
+    updateAttendance : function(req, res){
+      Attendnace
+        .findByIdAndUpdate(req.params.id, {$set: {at_status: req.body.status}}, function(err, attendance){
+          if(!err) res.json("Attendance updated");
+        });
     }
   };
 })();
