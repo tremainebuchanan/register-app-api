@@ -39,8 +39,10 @@
 	exports.show = function(req, res){
 	  Session
       .findById(req.params.id)
+      .populate('st_students')
+      .populate('se_type_id')
       .exec(function (err, session) {
-        res.json(session);
+        if(!err) res.json(session);
       });
   };
 
