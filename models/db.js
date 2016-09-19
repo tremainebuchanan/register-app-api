@@ -32,8 +32,16 @@
     se_created: {type: Date, default: Date.now()}
   });
 
+  var AttendanceSchema = new Schema({
+    st_student_id : {type: Schema.Types.ObjectId, ref: 'Student'},
+    se_session_id: {type: Schema.Types.ObjectId, ref: 'Session'},
+    at_created: {type: Date, default: Date.now()},
+    at_status: {type: Boolean, default: true}
+  });
+
   exports.Student = mongoose.model('Student', StudentSchema);
   exports.Session = mongoose.model('Session', SessionSchema);
   exports.SessionType = mongoose.model('SessionType', SessionType);
+  exports.Attendance = mongoose.model('Attendance', AttendanceSchema);
 
 })();
