@@ -46,4 +46,18 @@
       });
   };
 
+  exports.update = function(req, res){
+    Session.findById(req.params.id, function(err, session){
+       var students = req.body.students,
+          len = students.length,
+          i = 0;
+      for(; i < len; i++){
+        session.st_students.push(students[0]);
+      }
+      session.save(function(err, updatedSession){
+        if(!err) res.json('Session updated');
+      });
+    });
+  }
+
 })();
