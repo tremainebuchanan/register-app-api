@@ -9,6 +9,7 @@
        .find()
        .populate('st_students')
        .populate('se_type_id')
+       .sort("se_created")
        .exec(function(err, result){
 	      res.json({"sessions": result});
      });
