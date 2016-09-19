@@ -9,7 +9,7 @@
        .find()
        .populate('st_students')
        .populate('se_type_id')
-       .sort("se_created")
+       .sort("-se_created")
        .exec(function(err, result){
 	      res.json({"sessions": result});
      });
@@ -18,6 +18,7 @@
 	exports.create = function(req, res){
 	  var session = new Session();
     var session_type = req.body.session_type.toLowerCase();
+    session.se_created = Date.now();
     SessionType
         .findOne({"se_type_name" : session_type })
         .exec(function(err, type){
