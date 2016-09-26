@@ -5,16 +5,18 @@
         logger = require('morgan'),
         cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser'),
+        passport = require('passport'),
+        session = require('express-session'),
         routes = require('./routes/index'),
-        users = require('./routes/user'),
+        users = require('./routes/user/user'),
         students = require('./routes/student/routes.js'),
         sessions = require('./routes/session/routes.js'),
         admin = require('./routes/admin/routes.js'),
+        instructor = require('./routes/instructor/routes'),
+
         app = express(),
         env = process.env.NODE_ENV || 'development';
-        //mongoose = require('mongoose');
 
-    //mongoose.connect(process.env.MONGODB_URI);
     app.locals.ENV = env;
     app.locals.ENV_DEVELOPMENT = env == 'development';
 
@@ -31,12 +33,20 @@
     }));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(session({
+      secret: process.env.SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use('/', routes);
-    app.use('/users', users);
+    app.use('/', users);
     app.use('/', students);
     app.use('/', sessions);
     app.use('/', admin);
+    app.use('/', instructor);
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
         var err = new Error('Not Found');

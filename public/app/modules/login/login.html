@@ -1,0 +1,21 @@
+<form class="form-horizontal login-form" novalidate data-ng-submit="vm.processForm()">
+  <h3 class="text-center">Log In</h3>
+  <div class="form-group">
+    <input
+      class="form-control ctrls"
+      type="email"
+      placeholder="Email Address"
+      data-ng-model="vm.email">
+  </div>
+
+  <div class="form-group">
+    <input
+        class="form-control ctrls"
+        type="password"
+        placeholder="Password"
+        data-ng-model="vm.password">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-block btn-lg btn-login">Log In</button>
+  </div>
+</form>

@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="section-header">Create Registers</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-6">
+          <form class="form-horizontal" novalidate ng-submit="vm.create()">
+            <div class="form-group">
+              <label>Choose the beginning of the term</label>
+              <input type="date"
+                     class="form-control"
+                     data-ng-model="vm.register.date">
+            </div>
+
+            <div class="form-group">
+              <label>Choose an instructor</label>
+              <select class="form-control"
+                      ng-model="vm.register.instructor"
+                      ng-options="instructor.name for instructor in vm.instructors track by instructor.id">
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Choose a class</label>
+              <select class="form-control"
+                      ng-model="vm.register.class"
+                      ng-options="class.title for class in vm.classes track by class.id">
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Choose the number of sessions</label>
+
+              <div class="radio">
+                <label>
+                  <input type="radio" name="session" value="2" data-ng-model="vm.register.session">
+                  Two
+                </label>
+              </div>
+
+              <div class="radio">
+                <label>
+                  <input type="radio" name="session" value="1" data-ng-model="vm.register.session">
+                  One
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-default btn-lg">Create</button>
+          </form>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
