@@ -1,5 +1,6 @@
 body{
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 * {
@@ -8,6 +9,7 @@ body{
 
 a {
   color: #00B7FF;
+  font-weight: 300;
 }
 
 .login-form{

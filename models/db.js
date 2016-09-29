@@ -9,7 +9,7 @@
     }
   };
   mongoose.Promise = global.Promise;
-  mongoose.connect(process.env.MONGODB_LOCAL);
+  mongoose.connect(process.env.MONGODB_URI);
 
   var StudentSchema = new Schema({
     st_first_name: {type: String, required: true},
