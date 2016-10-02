@@ -50,7 +50,8 @@
 
   var SessionSchema = new Schema({
     se_created: {type: Date, default: Date.now()},
-    se_start_time: {type: Date }
+    se_name: {type: String, required: true}
+    //se_start_time: {type: Date }
     //,
     // se_end_time: {type: Date},
     // se_duration: {type: Number},
