@@ -77,6 +77,8 @@
   router.get('/users', function(req, res) {
     User
       .find()
+      .populate('or_id')
+      .populate('us_type_id')
       .exec(function(err, users){
         if(!err) res.json(users);
       });
@@ -91,14 +93,13 @@
   });
 
   router.post('/register', function(req, res){
+    //console.log(req.body);
+    //res.end()
     var organization = new Organization({
-        or_name: req.body.org_name
+        or_name: req.body.or_name
     });
 
-    var user = new User({
-      us_email : req.body.email,
-      us_password: req.body.password
-    });
+    var user = new User(req.body);
 
     organization.us_id = user.id;
     user.or_id = organization.id;
@@ -108,8 +109,8 @@
           organization.save(function(err){
             if(!err)
               //send email
-              res.redirect('/login');
-              //res.json('Organization and user created');
+              //res.redirect('/login');
+              res.json('Organization and user created');
           });
         }
       });
@@ -122,6 +123,23 @@
       .exec(function(err, orgs){
         if(!err) res.json(orgs);
       });
+  });
+
+  router.post('/users/:or_id', function(req, res){
+    var user = new User(req.body);
+    user.or_id = req.params.or_id;
+    user.save(function(err){
+      if(!err) res.json('User created for organization ' + req.params.or_id);
+    });
+  });
+
+  router.get('/users/:or_id/organizations', function(req, res){
+      User
+        .find({or_id: req.params.or_id})
+        .populate('us_type_id')
+        .exec(function(err, users){
+        if(!err || !users) res.json(users);
+      })
   });
 
   module.exports = router;

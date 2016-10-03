@@ -40,7 +40,9 @@
     in_first_name: {type: String, required: true},
     in_last_name: {type: String, required: true},
     in_created: {type: String, default: Date.now()},
-    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},
+    in_email: {type: String, required: true, unique: true},
+    in_password: {type: String, required: true}
   }, schemaOptions);
 
   var LocationSchema = new Schema({
@@ -50,15 +52,15 @@
 
   var SessionSchema = new Schema({
     se_created: {type: Date, default: Date.now()},
-    se_name: {type: String, required: true}
+    se_name: {type: String, required: true},
     //se_start_time: {type: Date }
     //,
     // se_end_time: {type: Date},
     // se_duration: {type: Number},
     // se_day: {type: String},
-    // st_students: [{type: Schema.Types.ObjectId, ref: 'Student'}],
-    // su_subject_id: {type: Schema.Types.ObjectId, ref: 'Subject'},
-    // in_instructor_id: {type: Schema.Types.ObjectId, ref: 'Instructor'},
+    //st_students: [{type: Schema.Types.ObjectId, ref: 'Student'}],
+    su_subject_id: {type: Schema.Types.ObjectId, ref: 'Subject'},
+    in_instructor_id: {type: Schema.Types.ObjectId, ref: 'Instructor'}
     // lo_location_id: {type: Schema.Types.ObjectId, ref: 'Location'}
   });
 
@@ -69,23 +71,38 @@
     at_status: {type: Boolean, default: true}
   });
 
+  var UserTypeSchema = new Schema({
+    us_type_title: {type: String, required: true},
+    us_type_desc: {type: String},
+    us_type_created: {type: Date, default: Date.now()}
+  });
+
   var UserSchema = new Schema({
-    //us_first_name: {type: String, required: true},
-    //us_last_name: {type: String, required: true},
+    us_first_name: {type: String, required: true},
+    us_last_name: {type: String, required: true},
     us_email: {type: String, required: true, unique: true},
     us_password: {type: String, required: true, select: false},
     //us_password_salt: {type: String, required: true, select: false},
     us_created: {type: Date, select: false},
-    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},
+    us_type_id: {type: Schema.Types.ObjectId, ref: 'UserType'}
   });
 
   var OrganizationSchema = new Schema({
     or_name: {type: String, required: true},
-    us_id: {type: Schema.Types.ObjectId, ref: 'User'}
+    us_id: {type: Schema.Types.ObjectId, ref: 'User'},
+    instructors: [{type: Schema.Types.ObjectId, ref: 'Instructor'}]
   });
 
   InstructorSchema.virtual('name').get(function () {
     return this.in_first_name + ' ' + this.in_last_name;
+  });
+
+  var AssignmentSchema = new Schema({
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},
+    subjects: [{type: Schema.Types.ObjectId, ref: 'Subject'}],
+    us_id: {type: Schema.Types.ObjectId, ref: 'User'},
+    as_created: {type: Date, default: Date.now()}
   });
 
   exports.Student = mongoose.model('Student', StudentSchema);
@@ -97,5 +114,7 @@
   exports.Subject = mongoose.model('Subject', SubjectSchema);
   exports.User = mongoose.model('User', UserSchema);
   exports.Organization = mongoose.model('Organization', OrganizationSchema);
+  exports.UserType = mongoose.model('UserType', UserTypeSchema);
+  exports.Assignment = mongoose.model('Assignment', AssignmentSchema);
 
 })();
