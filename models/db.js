@@ -10,6 +10,7 @@
   };
   mongoose.Promise = global.Promise;
   mongoose.connect(process.env.MONGODB_URI);
+  //mongoose.connect(process.env.MONGODB_LOCAL);
 
   var StudentSchema = new Schema({
     st_first_name: {type: String, required: true},
@@ -21,7 +22,9 @@
     // st_primary_contact: {type: String, required: true},
     // ne_type_id: Schema.Types.ObjectId,
     // st_primary_contact_rel: {type: String, required: true},
-    st_created: {type: Date, default: Date.now()}
+    st_created: {type: Date, default: Date.now()},
+    st_contact: {type: String},
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
   });
 
   var SessionType = new Schema({
@@ -90,8 +93,8 @@
 
   var OrganizationSchema = new Schema({
     or_name: {type: String, required: true},
-    us_id: {type: Schema.Types.ObjectId, ref: 'User'},
-    instructors: [{type: Schema.Types.ObjectId, ref: 'Instructor'}]
+    us_id: {type: Schema.Types.ObjectId, ref: 'User'}, //admin user
+    or_created: {type: Date, default: Date.now()}
   });
 
   InstructorSchema.virtual('name').get(function () {
@@ -105,6 +108,16 @@
     as_created: {type: Date, default: Date.now()}
   });
 
+  var RegisterSchema = new Schema({
+    su_id: {type: Schema.Types.ObjectId, ref: 'Subject'},
+    students: [{type: Schema.Types.ObjectId, ref: 'Student'}],
+    re_start : {type: Date},
+    re_end: {type: Date},
+    re_created: {type: Date, default: Date.now()},
+    re_assigned_to: {type: Schema.Types.ObjectId, ref: 'User'},
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
+  });
+
   exports.Student = mongoose.model('Student', StudentSchema);
   exports.Session = mongoose.model('Session', SessionSchema);
   exports.SessionType = mongoose.model('SessionType', SessionType);
@@ -116,5 +129,6 @@
   exports.Organization = mongoose.model('Organization', OrganizationSchema);
   exports.UserType = mongoose.model('UserType', UserTypeSchema);
   exports.Assignment = mongoose.model('Assignment', AssignmentSchema);
+  exports.Register = mongoose.model('Register', RegisterSchema);
 
 })();
