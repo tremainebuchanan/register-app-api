@@ -107,7 +107,7 @@
         .find({us_id: req.params.us_id})
         .populate('subjects')
         .exec(function(err, assignments){
-          if(!err) res.json(assignments);
+          if(!err) res.json({"assignments": assignments});
         })
     }
   };
