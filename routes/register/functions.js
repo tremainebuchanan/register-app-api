@@ -38,6 +38,10 @@
     show: function(req, res){
       Register
         .findById(req.params.id)
+        .populate('students')
+        .populate('su_id')
+        .populate('re_assigned_to')
+        .populate('or_id')
         .exec(function(err, register){
           if(!err) res.json(register);
         });
