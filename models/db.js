@@ -129,6 +129,11 @@
     re_created: {type: Date, default: Date.now()},
     re_assigned_to: {type: Schema.Types.ObjectId, ref: 'User'},
     or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
+  }, schemaOptions);
+
+
+  RegisterSchema.virtual('count').get(function(){
+    return this.students.length;
   });
 
   exports.Student = mongoose.model('Student', StudentSchema);
