@@ -25,7 +25,7 @@
     st_created: {type: Date, default: Date.now()},
     st_contact: {type: String},
     or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
-  });
+  }, schemaOptions);
 
   var SessionType = new Schema({
     se_type_name: {type: String, required: true},
@@ -108,6 +108,10 @@
 
   InstructorSchema.virtual('name').get(function () {
     return this.in_first_name + ' ' + this.in_last_name;
+  });
+
+  StudentSchema.virtual('name').get(function () {
+    return this.st_first_name + ' ' + this.st_last_name;
   });
 
   var AssignmentSchema = new Schema({
