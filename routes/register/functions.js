@@ -43,7 +43,7 @@
         .populate('re_assigned_to')
         .populate('or_id')
         .exec(function(err, register){
-          if(!err) res.json(register);
+          if(!err) res.json({"register": register});
         });
     },
     assignStudents: function(req, res){
