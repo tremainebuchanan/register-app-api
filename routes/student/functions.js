@@ -1,11 +1,14 @@
 (function(){
 	var model = require('../../models/db'),
       Student = model.Student,
-      Attendnace = model.Attendance;
+      Attendance = model.Attendance;
 
   exports.student = {
     index : function(req, res) {
-      Student.find().exec(function (err, students) {
+      Student
+        .find()
+        .populate('or_id')
+        .exec(function (err, students) {
         if (!err) res.json({"students": students});
       });
     },
@@ -28,15 +31,15 @@
     },
 
     getAttendance : function(req, res){
-      Attendnace
-          .find({"st_student_id": req.params.id})
+      Attendance
+          .find({or_id: req.params.or_id})
           .exec(function (err, attendance) {
-            if(!err) res.json({"attendance" : attendance});
+            if(!err) res.json(attendance);
           });
     },
 
     getAttendanceById : function(req, res){
-      Attendnace
+      Attendance
         .findById(req.params.id)
         .exec(function (err, attendance) {
           if(!err) res.json(attendance);
@@ -44,17 +47,26 @@
     },
 
     postAttendance : function(req, res){
-      var attendance = new Attendnace(req.body);
-      attendance.at_created = Date.now();
-      attendance.save(function(err){
-        if(!err) res.json("Attendance record with id " + attendance.id + " created");
+      Attendance.create(req.body, function (err) {
+        var message = 'success';
+        if(err) message = 'error';
+
+        res.json(message);
       });
     },
 
     updateAttendance : function(req, res){
-      Attendnace
+      Attendance
         .findByIdAndUpdate(req.params.id, {$set: {at_status: req.body.status}}, function(err, attendance){
           if(!err) res.json("Attendance updated");
+        });
+    },
+    bulk: function(req, res){
+      Attendance.create(req.body, function (err) {
+          var message = 'success';
+          if(err) message = 'error';
+
+          res.json(message);
         });
     }
   };

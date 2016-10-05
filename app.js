@@ -14,6 +14,7 @@
         admin = require('./routes/admin/routes.js'),
         instructor = require('./routes/instructor/routes'),
         organizations = require('./routes/organization/routes'),
+        registers = require('./routes/register/routes'),
 
         app = express(),
         env = process.env.NODE_ENV || 'development';
@@ -48,7 +49,8 @@
     app.use('/', sessions);
     app.use('/', admin);
     app.use('/', instructor);
-  app.use('/', organizations);
+    app.use('/', organizations);
+    app.use('/', registers);
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
         var err = new Error('Not Found');

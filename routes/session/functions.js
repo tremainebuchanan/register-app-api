@@ -7,14 +7,8 @@
 
 	exports.session = {
     create : function(req, res){
-
-      //var hr = moment(req.body.hr, "HH");
-      //console.log(hr.get('hour'));
-      // console.log(hr.get('hour'));
-      // res.end();
-
-      var session = new Session();
-      session.se_start_time = moment(req.body.hr, "HH");
+      var session = new Session(req.body);
+      //session.se_start_time = moment(req.body.hr, "HH");
       session.save(function(err){
         if(!err) res.json("Session with id " + session.id + " created.");
       });
@@ -28,8 +22,8 @@
     },show : function(req, res){
       Session
         .findById(req.params.id)
-        .populate('st_students')
-        .populate('se_type_id')
+        // .populate('st_students')
+        // .populate('se_type_id')
         .exec(function (err, session) {
           if(!err) res.json(session);
         });

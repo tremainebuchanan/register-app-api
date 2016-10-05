@@ -3,7 +3,10 @@
       SessionType = model.SessionType,
       Location = model.Location,
       Instructor = model.Instructor,
-      Subject = model.Subject;
+      Subject = model.Subject,
+      UserType = model.UserType,
+      Assignment = model.Assignment,
+      AttendanceType = model.AttendanceType;
 
   // exports.sessiontype = {
   //
@@ -82,8 +85,8 @@
     index: function(req, res){
       Subject
         .find()
-        .exec(function(err, subject){
-          if(!err) res.json(subject);
+        .exec(function(err, subjects){
+          if(!err) res.json(subjects);
         });
     },
     show: function(req, res){
@@ -91,6 +94,67 @@
         .findById(req.params.id)
         .exec(function(err, subject){
           if(!err) res.json(subject);
+        });
+    },
+    assign: function(req, res){
+      var assignment = new Assignment(req.body);
+      assignment.or_id = req.params.or_id;
+      assignment.save(function(err){
+        if(!err) res.json("Assignment completed");
+      });
+    },
+    all: function(req, res){
+      Assignment
+        .find({us_id: req.params.us_id})
+        .populate('subjects')
+        .exec(function(err, assignments){
+          if(!err) res.json({"assignments": assignments});
+        })
+    }
+  };
+
+  exports.usertype = {
+    create: function(req, res){
+      var usertype = new UserType(req.body);
+      usertype.save(function(err){
+        if(!err) res.json('User Type created with id ' + usertype.id);
+      });
+    },
+    index: function(req, res){
+      UserType
+        .find()
+        .exec(function(err, usertype){
+          if(!err) res.json(usertype);
+        });
+    },
+    show: function(req, res){
+      UserType
+        .findById(req.params.id)
+        .exec(function(err, usertype){
+          if(!err) res.json(usertype);
+        });
+    }
+  };
+
+  exports.attendancetype = {
+    create: function(req, res){
+      var attendancetype = new AttendanceType(req.body);
+      attendancetype.save(function(err){
+        if(!err) res.json('attendance Type created with id ' + attendancetype.id);
+      });
+    },
+    index: function(req, res){
+      AttendanceType
+        .find()
+        .exec(function(err, attendancetype){
+          if(!err) res.json({'attendancetypes': attendancetype});
+        });
+    },
+    show: function(req, res){
+      AttendanceType
+        .findById(req.params.id)
+        .exec(function(err, attendancetype){
+          if(!err) res.json(attendancetype);
         });
     }
   };
