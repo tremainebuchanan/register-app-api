@@ -67,11 +67,20 @@
     // lo_location_id: {type: Schema.Types.ObjectId, ref: 'Location'}
   });
 
+  var AttendanceTypeSchema = new Schema({
+    at_type_title: {type: String, required: true},
+    at_type_desc: {type: String},
+    at_type_created: {type: Date, default: Date.now()}
+  });
+
   var AttendanceSchema = new Schema({
-    st_student_id : {type: Schema.Types.ObjectId, ref: 'Student'},
-    se_session_id: {type: Schema.Types.ObjectId, ref: 'Session'},
+    st_id : {type: Schema.Types.ObjectId, ref: 'Student'},
+    re_id: {type: Schema.Types.ObjectId, ref: 'Register'},
     at_created: {type: Date, default: Date.now()},
-    at_status: {type: Boolean, default: true}
+    at_type_id: {type: Schema.Types.ObjectId, ref: 'AttendanceType'},
+    at_marked_by: {type: Schema.Types.ObjectId, ref: 'User'},
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},
+    su_id: {type: Schema.Types.ObjectId, ref: 'Subject'}
   });
 
   var UserTypeSchema = new Schema({
@@ -122,6 +131,7 @@
   exports.Session = mongoose.model('Session', SessionSchema);
   exports.SessionType = mongoose.model('SessionType', SessionType);
   exports.Attendance = mongoose.model('Attendance', AttendanceSchema);
+  exports.AttendanceType = mongoose.model('AttendanceType', AttendanceTypeSchema);
   exports.Location = mongoose.model('Location', LocationSchema);
   exports.Instructor = mongoose.model('Instructor', InstructorSchema);
   exports.Subject = mongoose.model('Subject', SubjectSchema);

@@ -5,7 +5,8 @@
       Instructor = model.Instructor,
       Subject = model.Subject,
       UserType = model.UserType,
-      Assignment = model.Assignment;
+      Assignment = model.Assignment,
+      AttendanceType = model.AttendanceType;
 
   // exports.sessiontype = {
   //
@@ -131,6 +132,29 @@
         .findById(req.params.id)
         .exec(function(err, usertype){
           if(!err) res.json(usertype);
+        });
+    }
+  };
+
+  exports.attendancetype = {
+    create: function(req, res){
+      var attendancetype = new AttendanceType(req.body);
+      attendancetype.save(function(err){
+        if(!err) res.json('attendance Type created with id ' + attendancetype.id);
+      });
+    },
+    index: function(req, res){
+      AttendanceType
+        .find()
+        .exec(function(err, attendancetype){
+          if(!err) res.json({'attendancetypes': attendancetype});
+        });
+    },
+    show: function(req, res){
+      AttendanceType
+        .findById(req.params.id)
+        .exec(function(err, attendancetype){
+          if(!err) res.json(attendancetype);
         });
     }
   };

@@ -8,10 +8,11 @@
 	router.get('/students/:id', api.student.show);
 	router.put('/students/:id', api.student.update);
 
-  router.get('/students/:id/attendance', api.student.getAttendance);
-  router.get('/students/:id/attendance/:id', api.student.getAttendanceById);
-  router.put('/students/:id/attendance/:id', api.student.updateAttendance);
-  router.post('/students/:id/attendance', api.student.postAttendance);
+  router.get('/students/:or_id/attendance', api.student.getAttendance);
+  router.get('/students/:or_id/attendance/:st_id', api.student.getAttendanceById);
+  //router.put('/students/:or_id/attendance/:st_id', api.student.updateAttendance);
+  router.post('/students/:or_id/attendance', api.student.postAttendance);
+  //router.post('/students/:or_id/attendance/bulk', api.student.bulk);
 
 	module.exports = router;
 })();

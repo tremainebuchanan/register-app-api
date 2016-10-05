@@ -25,5 +25,9 @@
   router.get('/admin/usertypes', api.usertype.index);
   router.get('/admin/usertypes/:id', api.usertype.show);
 
+  router.post('/admin/attendancetypes', api.attendancetype.create);
+  router.get('/admin/attendancetypes', api.attendancetype.index);
+  router.get('/admin/attendancetypes/:id', api.attendancetype.show);
+
   module.exports = router;
 })();
