@@ -27,7 +27,7 @@
         .populate('re_assigned_to')
         .populate('or_id')
         .exec(function(err, registers){
-          if(!err) res.json({"registers": registers});
+          if(!err) res.json(registers);
         });
     },
     /**
