@@ -47,13 +47,12 @@
     },
 
     postAttendance : function(req, res){
-      res.json({"message": "success"});
-      // Attendance.create(req.body, function (err) {
-      //   var message = 'success';
-      //   if(err) message = 'error';
+      Attendance.create(req.body, function (err) {
+        var message = 'success';
+        if(err) message = 'error';
 
-      //   res.json({"message": message});
-      // });
+        res.json({"message": message});
+      });
     },
 
     updateAttendance : function(req, res){
