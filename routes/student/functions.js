@@ -33,6 +33,9 @@
     getAttendance : function(req, res){
       Attendance
           .find({or_id: req.params.or_id})
+          .populate('st_id')
+          .populate('at_type_id')
+          .populate('su_id')
           .exec(function (err, attendance) {
             if(!err) res.json(attendance);
           });
@@ -41,11 +44,14 @@
     getAttendanceById : function(req, res){
       Attendance
         .findById(req.params.id)
+        .populate('st_id')
+        .populate('at_type_id')
+        .populate('su_id')
         .exec(function (err, attendance) {
           if(!err) res.json(attendance);
         });
     },
-
+    //TODO update register field marked when attendance is taken
     postAttendance : function(req, res){
       Attendance.create(req.body, function (err) {
         var message = 'success';

@@ -128,6 +128,8 @@
     re_end: {type: Date},
     re_created: {type: Date, default: Date.now()},
     re_assigned_to: {type: Schema.Types.ObjectId, ref: 'User'},
+    re_last_marked: {type: Date},
+    re_no_marked: {type: Number, default: 1}, //number of times a register is marked for the day
     or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
   }, schemaOptions);
 
