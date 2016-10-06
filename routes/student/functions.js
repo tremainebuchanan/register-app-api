@@ -51,7 +51,7 @@
         var message = 'success';
         if(err) message = 'error';
 
-        res.json(message);
+        res.json({"message": message});
       });
     },
 
