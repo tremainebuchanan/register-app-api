@@ -57,13 +57,8 @@
       Attendance.create(req.body, function (err) {
         var message = 'success';
         if(err) message = 'error';
-
-        Register.findOne({or_id: req.params.or_id}, function(err, register){
-           register.re_last_marked = Date.now();
-           register.save(function(err){
-             if(!err) res.json({"message": message});
-           })
-        });        
+        
+        res.json({"message": message});
       });
     },
 
