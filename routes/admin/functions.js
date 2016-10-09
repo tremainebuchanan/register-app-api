@@ -99,6 +99,10 @@
     assign: function(req, res){
       var assignment = new Assignment(req.body);
       assignment.or_id = req.params.or_id;
+      var len = req.body.subjects, i = 0;
+      for(; i < len; i++){
+        assignment.subjects.push(req.body.subjects[i]);
+      }
       assignment.save(function(err){
         if(!err) res.json("Assignment completed");
       });
@@ -107,6 +111,7 @@
       Assignment
         .find({us_id: req.params.us_id})
         .populate('subjects')
+        .populate('us_id')
         .exec(function(err, assignments){
           if(!err) res.json({"assignments": assignments});
         })

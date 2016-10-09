@@ -27,6 +27,12 @@
       })
     },
 
+    createBulk : function(req, res){
+      Student.create(req.body, function(err){
+          if(!err) return res.json("Created");
+        });
+    },
+
     update : function(req, res){
       res.json('update a student');
     },

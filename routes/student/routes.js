@@ -5,8 +5,10 @@
 
 	router.get('/students', api.student.index);
 	router.post('/students', api.student.create);
+  router.post('/students/bulk', api.student.createBulk);
 	router.get('/students/:id', api.student.show);
 	router.put('/students/:id', api.student.update);
+  router.put('/students/:or_id/bulk', api.student.bulk);
 
   router.get('/students/:or_id/attendance', api.student.getAttendance);
   router.get('/students/:or_id/attendance/:st_id', api.student.getAttendanceById);

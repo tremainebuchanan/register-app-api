@@ -1,6 +1,7 @@
 (function(){
   var model = require('../../models/db'),
-      Register = model.Register;
+      Register = model.Register,
+      Student = model.Student;
 
   exports.register = {
     /**
@@ -10,6 +11,7 @@
      */
     create: function(req, res){
       var register = new Register(req.body);
+      register.re_mark_on.push("daily");
       register.save(function(err){
         if(!err) res.json('Created register with id ' + register.id);
       });
@@ -62,6 +64,28 @@
           if(!err) res.json("Students added.");
         })
       });
+    },
+    assignAll: function(req, res){
+      Register
+        .findById(req.params.id)
+        .exec(function(err, register){
+         if(!err){
+           Student
+             .find({"or_id": req.params.or_id})
+             .exec(function(err, students){
+               if(!err){
+                 var len = students.length, i = 0;
+                 for(; i < len; i++){
+                   register.students.push(students[i]);
+                 }
+                 register.save(function (err) {
+                   if(!err) res.json("Students added.");
+                 })
+               }
+           })
+         }
+      });
+
     },
     /**
      * Updates a register.

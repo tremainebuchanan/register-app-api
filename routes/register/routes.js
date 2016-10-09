@@ -8,6 +8,6 @@
   router.get('/registers/:id', api.register.show);
   router.put('/registers/:id', api.register.update);
   router.put('/registers/:id/students', api.register.assignStudents);//
-
+  router.put('/registers/:id/assign/:or_id', api.register.assignAll);
   module.exports = router;
 })();
