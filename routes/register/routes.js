@@ -7,7 +7,7 @@
   router.get('/registers', api.register.index);
   router.get('/registers/:id', api.register.show);
   router.put('/registers/:id', api.register.update);
-  router.put('/registers/:id/students', api.register.assignStudents);
+  router.put('/registers/:id/students', api.register.assignStudents);//
 
   module.exports = router;
 })();
