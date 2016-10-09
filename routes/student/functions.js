@@ -1,7 +1,8 @@
 (function(){
 	var model = require('../../models/db'),
       Student = model.Student,
-      Attendance = model.Attendance;
+      Attendance = model.Attendance,
+      Register = model.Register;
 
   exports.student = {
     index : function(req, res) {
@@ -57,7 +58,12 @@
         var message = 'success';
         if(err) message = 'error';
 
-        res.json({"message": message});
+        Register.findOne({or_id: req.params.or_id}, function(err, register){
+           register.re_last_marked = Date.now();
+           register.save(function(err){
+             if(!err) res.json({"message": message});
+           })
+        });        
       });
     },
 

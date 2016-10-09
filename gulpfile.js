@@ -1,26 +1,14 @@
-var gulp = require('gulp'),
-  nodemon = require('gulp-nodemon'),
-  plumber = require('gulp-plumber'),
-  livereload = require('gulp-livereload');
-
-
-gulp.task('develop', function () {
-  livereload.listen();
-  nodemon({
-    script: 'bin/www',
-    ext: 'js ejs coffee',
-    stdout: false
-  }).on('readable', function () {
-    this.stdout.on('data', function (chunk) {
-      if(/^Express server listening on port/.test(chunk)){
-        livereload.changed(__dirname);
-      }
-    });
-    this.stdout.pipe(process.stdout);
-    this.stderr.pipe(process.stderr);
-  });
-});
-
-gulp.task('default', [
-  'develop'
-]);
+// 'use strict'
+// var gulp = require('gulp')
+// var nodemon = require('gulp-nodemon')
+// gulp.task('develop', ()=> {
+//     var stream = nodemon({ script: 'bin/www', ext: 'html js'})
+//       stream.on('restart', ()=> {
+//         console.log('restarted!')
+//     })
+//     .on('crash', ()=> {
+//       console.log('Application has crashed!\n')
+//     })
+// })
+//
+// gulp.task('default', ['develop'])

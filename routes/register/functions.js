@@ -46,6 +46,11 @@
           if(!err) res.json(register);
         });
     },
+    /**
+     * Assigns a list of students to a register.
+     * @param req
+     * @param res
+     */
     assignStudents: function(req, res){
       Register.findById(req.params.id, function(err, register){
         var len = req.body.students.length;
@@ -58,9 +63,16 @@
         })
       });
     },
-    update : function(req, res){
+    /**
+     * Updates a register.
+     * @param req
+     * @param res
+     */
+    update : function (req, res) {
       Register.findByIdAndUpdate(req.params.id, {$set: req.body}, function(err, register){
-        if(!err){ res.json("register with id updated");}
+        if (!err) {
+          res.json({success: true, message: 'Register with id' + register.id + ' updated.'})
+        }
       });
     }
   };
