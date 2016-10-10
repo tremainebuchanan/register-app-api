@@ -93,8 +93,6 @@
   });
 
   router.post('/register', function(req, res){
-    //console.log(req.body);
-    //res.end()
     var organization = new Organization({
         or_name: req.body.or_name
     });
@@ -108,8 +106,6 @@
         if(!err){
           organization.save(function(err){
             if(!err)
-              //send email
-              //res.redirect('/login');
               res.json('Organization and user created');
           });
         }
