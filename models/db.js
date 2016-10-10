@@ -131,7 +131,8 @@
     re_last_marked: {type: Date},
     re_no_marked: {type: Number, default: 1}, //number of times a register is marked for the day
     re_mark_on: [{type: String}], //days of the week a register should be marked, weekly, mondays
-    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'}
+    or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},
+    temp_period: {type: String}
   }, schemaOptions);
 
 
