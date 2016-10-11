@@ -21,7 +21,7 @@
         .getAttendance($routeParams.id)
         .then(function(attendance){
           vm.attendance = attendance;
-          console.log(attendance.length);
+          console.log(attendance)
         }).catch(function(error){
           vm.register = {};
       })
@@ -37,7 +37,6 @@
     function getRegisters (or_id) {
       registerService.getRegisters(or_id).then(function(registers){
         vm.registers = registers;
-        console.log(registers);
       }).catch(function(error){
         console.log('Error occured in getting registers')
       })

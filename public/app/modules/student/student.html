@@ -19,7 +19,7 @@
       <tr data-ng-repeat="student in vm.students | filter: search">
         <td>{{$index + 1}}</td>
         <td>{{student.st_first_name}} {{student.st_last_name}}</td>
-        <td>{{student.st_gender}}</td>
+        <td><span class="capitalize"> {{student.st_gender}} </span></td>
         <td>{{student.st_contact}}</td>
         <td>{{student.st_created | date:'medium'}}</td>
       </tr>

@@ -6,14 +6,15 @@
     .module('nav')
     .controller('Nav', Nav);
 
-  Nav.$inject = ['apiService'];
+  Nav.$inject = ['$location','apiService'];
 
-  function Nav(apiService){
+  function Nav($location, apiService){
     var vm = this;
 
     vm.logout = logout;
 
     vm.user = getUser();
+    vm.setActive = setActive;
 
     function logout(){
       apiService
@@ -32,6 +33,10 @@
 
     function getUser(){
       return JSON.parse(sessionStorage.getItem('user'));
+    }
+
+    function setActive(path){
+      return ($location.path().substr(0, path.length) === path);
     }
   }
 })();

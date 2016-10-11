@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h1 class="section-header">{{vm.register.su_id.su_title}}</h1>
+    <h1 class="section-header">Register - {{vm.attendance[0].su_id.su_title}}</h1>
   </div>
 
   <div class="col-md-12">
@@ -13,14 +13,16 @@
       <th>Student Name</th>
       <th>Gender</th>
       <th>Status</th>
+      <th>Marked by</th>
       <th>Marked on</th>
       </thead>
       <tbody>
       <tr data-ng-repeat="record in vm.attendance | filter:search">
         <td>{{$index+1}}</td>
         <td>{{record.st_id.st_first_name}} {{record.st_id.st_last_name}}</td>
-        <td>{{record.st_id.st_gender}}</td>
-        <td>{{record.at_type_id.at_type_title}}</td>
+        <td><span class="capitalize"> {{record.st_id.st_gender }}</span></td>
+        <td><span class="capitalize">{{record.at_type_id.at_type_title}}</span></td>
+        <td>{{record.at_marked_by.us_first_name}} {{record.at_marked_by.us_last_name}}</td>
         <td>{{record.at_created | date:"medium"}}</td>
       </tr>
       </tbody>

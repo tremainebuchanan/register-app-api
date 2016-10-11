@@ -66,9 +66,13 @@
         .populate('st_id')
         .populate('at_type_id')
         .populate('su_id')
+        .populate('at_marked_by')
         .sort('st_last_name')
         .exec(function (err, attendance) {
-          if(!err) res.json(attendance);
+
+          if(!err){
+            res.json(attendance);
+          }
         });
     },
     //TODO update register field marked when attendance is taken

@@ -63,3 +63,7 @@ a {
 .table>thead>tr>th{
   font-weight: 500;
 }
+
+.capitalize{
+  text-transform: capitalize;
+}
