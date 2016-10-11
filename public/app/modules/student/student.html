@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="section-header">Students</h1>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <input class="form-control" placeholder="Search" ng-model="search">
+    </div>
+    <table class="table table-hover">
+      <thead>
+      <th>#</th>
+      <th>Student Name</th>
+      <th>Gender</th>
+      <th>Contact</th>
+      <th>Created</th>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="student in vm.students | filter: search">
+        <td>{{$index + 1}}</td>
+        <td>{{student.st_first_name}} {{student.st_last_name}}</td>
+        <td>{{student.st_gender}}</td>
+        <td>{{student.st_contact}}</td>
+        <td>{{student.st_created | date:'medium'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

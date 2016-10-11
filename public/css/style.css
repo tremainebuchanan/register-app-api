@@ -1,6 +1,7 @@
 body{
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  font-size: 16px;
 }
 
 * {
@@ -57,4 +58,8 @@ a {
   bottom: 0px;
   left: 0px;
   right: 0px;
+}
+
+.table>thead>tr>th{
+  font-weight: 500;
 }

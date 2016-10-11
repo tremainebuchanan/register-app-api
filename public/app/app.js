@@ -5,6 +5,7 @@
       'nav',
       'dashboard',
       'instructor',
+      'student',
       'api-service'
     ]).config(config);
 

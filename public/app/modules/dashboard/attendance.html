@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="section-header">{{vm.register.su_id.su_title}}</h1>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <input class="form-control" placeholder="Search" ng-model="search">
+    </div>
+    <table class="table table-hover">
+      <thead>
+      <th>#</th>
+      <th>Student Name</th>
+      <th>Gender</th>
+      <th>Status</th>
+      <th>Marked on</th>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="record in vm.attendance | filter:search">
+        <td>{{$index+1}}</td>
+        <td>{{record.st_id.st_first_name}} {{record.st_id.st_last_name}}</td>
+        <td>{{record.st_id.st_gender}}</td>
+        <td>{{record.at_type_id.at_type_title}}</td>
+        <td>{{record.at_created | date:"medium"}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

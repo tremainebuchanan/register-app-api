@@ -7,8 +7,9 @@
   exports.student = {
     index : function(req, res) {
       Student
-        .find()
+        .find(req.query)
         .populate('or_id')
+        .sort('st_last_name')
         .exec(function (err, students) {
         if (!err) res.json({"students": students});
       });
@@ -54,6 +55,18 @@
         .populate('st_id')
         .populate('at_type_id')
         .populate('su_id')
+        .exec(function (err, attendance) {
+          if(!err) res.json(attendance);
+        });
+    },
+
+    getAttendanceByRegister : function(req, res){
+      Attendance
+        .find({re_id: req.params.re_id})
+        .populate('st_id')
+        .populate('at_type_id')
+        .populate('su_id')
+        .sort('st_last_name')
         .exec(function (err, attendance) {
           if(!err) res.json(attendance);
         });

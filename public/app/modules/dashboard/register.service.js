@@ -10,12 +10,14 @@
 
   function registerService($http){
     var service = {
-      getRegistersByOrgId: getRegistersByOrgId
+      getRegisters: getRegisters,
+      getRegister: getRegister,
+      getAttendance: getAttendance
     };
 
-   function getRegistersByOrgId(org_id) {
+   function getRegisters(or_id) {
       return $http
-              .get('/instructors/' + org_id)
+              .get('/registers?or_id=' + or_id)
               .then(handleSuccess)
               .catch(handleError);
 
@@ -25,6 +27,34 @@
      function handleError(error){
        return error;
      }
+    }
+
+    function getRegister(id) {
+      return $http
+        .get('/registers/' + id)
+        .then(handleSuccess)
+        .catch(handleError);
+
+      function handleSuccess(response){
+        return response.data;
+      }
+      function handleError(error){
+        return error;
+      }
+    }
+
+    function getAttendance(re_id){
+      return $http
+        .get('/attendance/' + re_id)
+        .then(handleSuccess)
+        .catch(handleError);
+
+      function handleSuccess(response){
+        return response.data;
+      }
+      function handleError(error){
+        return error;
+      }
     }
 
     return service;

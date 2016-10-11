@@ -128,7 +128,7 @@
     re_end: {type: Date},
     re_created: {type: Date, default: Date.now()},
     re_assigned_to: {type: Schema.Types.ObjectId, ref: 'User'},
-    re_last_marked: {type: Date},
+    re_last_marked: {type: Date}, //should be array of dates the register was marked.
     re_no_marked: {type: Number, default: 1}, //number of times a register is marked for the day
     re_mark_on: [{type: String}], //days of the week a register should be marked, weekly, mondays
     or_id: {type: Schema.Types.ObjectId, ref: 'Organization'},

@@ -16,6 +16,10 @@
         controller: 'Dashboard',
         controllerAs: 'vm',
         templateUrl: '../app/modules/dashboard/create-register.html'
+    }).when('/registers/:id',{
+      controller: 'Dashboard',
+      controllerAs: 'vm',
+      templateUrl: '../app/modules/dashboard/attendance.html'
     });
   }
 })();

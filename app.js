@@ -15,6 +15,7 @@
         instructor = require('./routes/instructor/routes'),
         organizations = require('./routes/organization/routes'),
         registers = require('./routes/register/routes'),
+        attendance = require('./routes/attendance/routers'),
 
         app = express(),
         env = process.env.NODE_ENV || 'development';
@@ -51,6 +52,7 @@
     app.use('/', instructor);
     app.use('/', organizations);
     app.use('/', registers);
+    app.use('/', attendance);
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
         var err = new Error('Not Found');

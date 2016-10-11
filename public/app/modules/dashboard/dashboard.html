@@ -3,6 +3,25 @@
     <h1 class="section-header">Registers</h1>
   </div>
 
-   <div class="col-md-12" data-ng-include="'../app/partials/empty-state.html'">
+   <div class="col-md-12"
+        data-ng-include="'../app/partials/empty-state.html'"
+        data-ng-show="vm.registers.length < 1">
+  </div>
+
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+      <th>Title</th>
+      <th>Assigned to</th>
+      <th>Created</th>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="register in vm.registers" data-ng-click="vm.getAttendance(register)">
+        <td>{{register.su_id.su_title}}</td>
+        <td>{{register.re_assigned_to.us_first_name}} {{register.re_assigned_to.us_last_name}}</td>
+        <td>{{register.re_created | date:'medium'}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
